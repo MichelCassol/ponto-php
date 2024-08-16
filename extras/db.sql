@@ -1,3 +1,5 @@
+CREATE DATABASE INNOUT;
+
 USE INNOUT;
 
 DROP TABLE IF EXISTS working_hours, users;
