@@ -21,14 +21,14 @@ services:
             - db
 
     server:
-        container_name: ${CONTAINER_NAME}
+        container_name: ${CONTAINER_NAME}_server
         build: 
             args:
                 user: ${USER}
                 uid: ${UID}
             context: .
         volumes:
-            - "${PWD}/public:/var/www/html"
+            - "${PWD}:/var/www/html"
         ports:
             - "${PORT}:80"
         links:
