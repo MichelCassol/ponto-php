@@ -30,9 +30,22 @@ class Model
         $this->values[$key] = $value;
     }
 
+	public static function get(array $filters = [], $columns = '*')
+	{
+		$objects = [];
+		$result = static::getResultSetFromSelect($filters, $columns);
+		if ($result) {
+			$class = get_called_class();
+			while ($row = $result->fetch_array()) {
+				array_push($objects, new $class($row));
+			}
+		}
+		return $objects;
+	}
+
 	public static function getResultSetFromSelect(array $filters = [], string $columns = '*')
 	{
-		$sql = "SELECT ${columns} FROM " . static::$tableName . static::getFilters($filters);
+		$sql = "SELECT $columns FROM " . static::$tableName . static::getFilters($filters);
 		$result = Database::getResultFromQuery($sql);
 		if ($result->num_rows === 0) {
 			return null;
@@ -49,7 +62,7 @@ class Model
 		if (count($filters) > 0) {
 			$sql .= " WHERE 1 + 1";
 			foreach ($filters as $column => $value) {
-				$sql .= " AND ${column} = " . static::getFormatedValue($value);
+				$sql .= " AND $column = " . static::getFormatedValue($value);
 			}
 		}
 		return $sql;
@@ -60,7 +73,7 @@ class Model
 		if (is_null($value)) {
 			return "null";
 		} elseif (gettype($value) === "string") {
-			return "'${value}'";
+			return "'$value'";
 		} else {
 			return $value;
 		}
