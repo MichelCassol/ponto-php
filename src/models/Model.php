@@ -59,7 +59,6 @@ class Model
 		} else {
 			return $result;
 		}
-		return $sql;
 	}
 
 	private static function getFilters(array $filters)
