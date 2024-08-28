@@ -1,4 +1,5 @@
 <?php 
+
 class Login extends Model
 {
     public function checkLogin()

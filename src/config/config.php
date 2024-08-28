@@ -9,4 +9,5 @@ define('CONTROLLER_PATH', realpath(dirname(__FILE__, 2) . '/controllers'));
 
 // Arquivos
 require_once(realpath(dirname(__FILE__) . '/database.php'));
+require_once(realpath(dirname(__FILE__) . '/loader.php'));
 require_once(realpath(dirname(__FILE__) . '/autoload.php'));
