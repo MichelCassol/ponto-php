@@ -1,5 +1,10 @@
 <?php 
 
+function loadModel($model_name)
+{
+	require_once(MODEL_PATH . "$model_name.php");
+}
+
 function loadView(string $viewName, array $params = [])
 {
     if (count($params) > 0) {
