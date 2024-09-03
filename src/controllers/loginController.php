@@ -5,10 +5,10 @@ $exception = null;
 if (count($_POST) > 0) {
     $login = new Login($_POST);
     try {
-        $user = $login->checkLogin();
-        echo $user->name;
+      $user = $login->checkLogin();
+      header("Location: day_records.php");
     } catch (AppExceptions $th) {
-		$exception = $th;
+		  $exception = $th;
     }
 }
 
