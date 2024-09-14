@@ -8,7 +8,7 @@
 	?>
 	<div class="card">
 		<div class="card-header">
-			<h3>10 de Janeiro 2024</h3>
+			<h3><?= $today ?></h3>
 			<p class="mb-0">Os batimentos efetuados hoje</p>
 		</div>
 		<div class="card-body">
