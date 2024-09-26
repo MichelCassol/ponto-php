@@ -32,6 +32,7 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate)
     ];
 
     $value = rand(0, 100);
+
     if ($value <= $regularRate) {
         return $regularDayTemplate;
     } elseif ($value <= $regularRate + $extraRate) {
@@ -41,4 +42,24 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate)
     }
 }
 
-echo 'ok';
+function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate)
+{
+    $currentDate = $initialDate;
+    $today = new DateTime();
+    $colluns = ['user_id' => $userId, 'work_date' => $currentDate];
+
+    while (isBefore($currentDate, $today)) {
+        if (!isWeekend($currentDate)) {
+            $template = getDayTemplateByOdds($regularRate, $extraRate, $lazyRate);
+            $colluns = array_merge($colluns , $template);
+            $workingHours = new WorkingHours($colluns);
+            $workingHours->save();
+        }
+        $currentDate = getNextDay($currentDate)->format('Y-m-d');
+        $colluns['work_date'] = $currentDate;
+    }
+}
+
+populateWorkingHours(1, date('Y-m-d'), 70,20,10);
+
+echo "ok!";
