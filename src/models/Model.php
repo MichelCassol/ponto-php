@@ -63,16 +63,15 @@ class Model
 
 	public function save()
 	{
-		$sql = "INSERT INTO "  . static::$tableName . "(" . implode(",", static::$columns) . ") VALUES (";
-		foreach (static::$columns as $col)
+		$sql = "INSERT INTO "  . static::$tableName . " (" . implode(",", static::$coluns) . ") VALUES (";
+		foreach (static::$coluns as $col)
 		{
 			$sql .= static::getFormatedValue($this->$col) . ",";
 		}
 		$sql[strlen($sql) - 1] = ")";
 
-		die( $sql);
-		// $id = Database::executeSQL($sql);
-		// $this->id = $id;
+		$id = Database::executeSQL($sql);
+		$this->id = $id;
 	}
 
 	private static function getFilters(array $filters)
