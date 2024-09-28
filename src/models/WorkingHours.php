@@ -13,4 +13,19 @@ class WorkingHours extends Model
         'time4',
         'worked_time'
     ];
+
+    public static function loadFromUserAndDate($userId, $workDate)
+    {
+        $regitry = self::getOne(['user_id' => $userId, 'work_date' => $workDate]);
+
+        if (!$regitry) {
+            $regitry = new WorkingHours([
+                'user_id' => $userId, 
+                'work_date' => $workDate,
+                'worked_time' => 0
+            ]);
+        }
+
+        return $regitry;
+    }
 }
