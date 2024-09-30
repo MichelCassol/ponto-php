@@ -53,7 +53,7 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
             $template = getDayTemplateByOdds($regularRate, $extraRate, $lazyRate);
             $colluns = array_merge($colluns , $template);
             $workingHours = new WorkingHours($colluns);
-            $workingHours->save();
+            $workingHours->insert();
         }
         $currentDate = getNextDay($currentDate)->format('Y-m-d');
         $colluns['work_date'] = $currentDate;
