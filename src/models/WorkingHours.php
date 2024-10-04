@@ -62,7 +62,7 @@ class WorkingHours extends Model
         if ($t1) $part1 = $t1->diff(new DateTime());
         if ($t2) $part1 = $t1->diff($t2);
         if ($t3) $part2 = $t3->diff(new DateTime());
-        if ($t4) $part2 = $t4->diff($t3);
+        if ($t4) $part2 = $t3->diff($t4);
 
         return sumIntervals($part1, $part2);
     }
@@ -73,9 +73,24 @@ class WorkingHours extends Model
         $breakInterval = new DateInterval('PT0S');
         
         if ($t2) $breakInterval = $t2->diff(new DateTime());
-        if ($t3) $breakInterval = $t3->diff($t2);
+        if ($t3) $breakInterval = $t2->diff($t3);
 
         return $breakInterval;
+    }
+
+    function getExitTime()
+    {
+        [$t1,,,$t4] = $this->getTimes();
+        $workday = DateInterval::createFromDateString('8 hours');
+
+        if (!$t1) {
+            return (new DateTimeImmutable())->add($workday);
+        } elseif ($t4) {
+            return $t4;
+        } else {
+            $total = sumIntervals($workday,$this->getLauchInterval());
+            return $t1->add($total);
+        }
     }
 
     function getTimes()
