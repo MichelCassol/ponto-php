@@ -31,7 +31,7 @@
         <div class="sidebar-widget">
             <i class="icon icofont-hour-glass text-primary"></i>
             <div class="info">
-                <span class="main text-primary">04:20</span>
+                <span class="main text-primary"><?= $workedInterval?></span>
                 <span class="label text-muted"> Horas Trabalhadas</span>
             </div>
         </div>
