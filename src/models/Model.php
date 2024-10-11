@@ -93,7 +93,7 @@ class Model
 			$sql .= " WHERE 1 + 1";
 			foreach ($filters as $column => $value) {
 				if ($column == 'raw') {
-					$sql .= "AND $value";
+					$sql .= " AND $value";
 				} else {
 					$sql .= " AND $column = " . static::getFormatedValue($value);
 				}
