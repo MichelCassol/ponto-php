@@ -64,7 +64,7 @@ class WorkingHours extends Model
         }
     }
 
-    function getWorkedInterval()
+    public function getWorkedInterval()
     {
         [$t1, $t2, $t3, $t4] = $this->getTimes();
 
@@ -79,7 +79,7 @@ class WorkingHours extends Model
         return sumIntervals($part1, $part2);
     }
 
-    function getLauchInterval()
+    public function getLauchInterval()
     {
         [, $t2, $t3,] = $this->getTimes();
         $breakInterval = new DateInterval('PT0S');
@@ -90,7 +90,7 @@ class WorkingHours extends Model
         return $breakInterval;
     }
 
-    function getExitTime()
+    public function getExitTime()
     {
         [$t1,,,$t4] = $this->getTimes();
         $workday = DateInterval::createFromDateString('8 hours');
@@ -105,7 +105,7 @@ class WorkingHours extends Model
         }
     }
 
-    function getTimes()
+    private function getTimes()
     {
         $times = [];
 
