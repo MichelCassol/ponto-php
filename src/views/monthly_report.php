@@ -7,14 +7,28 @@
         );
     ?>
     <div>
-        <form class="mb-4" action="#" method="post">
-            <select name="period" id="period" class="form-control" placeholder="Selecione o período...">
-                <?php 
-                    foreach ($periods as $key => $month) {
-                        echo "<option value='$key'>$month</option>";
-                    }
-                ?>
-            </select>
+        <form class="mb-4 mt-4" action="#" method="post">
+            <div class="input-group">
+                <select name="user" id="user" class="form-control" placeholder="Selecione o usuário...">
+                    <option>Selecione o usuário...</option>
+                    <?php
+                        foreach ($users as $user) {
+                            echo "<option value='$user->id'>$user->name</option>";
+                        }
+                    ?>
+                </select>
+                <select name="period" id="period" class="form-control ml-2" placeholder="Selecione o período...">
+                    <option>Selecione o período...</option>
+                    <?php
+                        foreach ($periods as $key => $month) {
+                            echo "<option value='$key'>$month</option>";
+                        }
+                    ?>
+                </select>
+                <button class="btn btn-primary ml-2">
+                    <i class="icofont-search"></i>
+                </button>
+            </div>
         </form>
         <table class="table table-bordered table-striped table-hover">
             <thead>

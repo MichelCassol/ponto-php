@@ -5,6 +5,10 @@ requireValidSession();
 $currentDate = new DateTime();
 
 $user = $_SESSION['user'];
+$users = null;
+if ($user->is_admin) {
+    $users = User::get();
+}
 
 $selectedPeriod = $_POST['period'] ? $_POST['period'] : $currentDate->format('Y-m');
 $periods = [];
@@ -48,5 +52,6 @@ loadTemplateView('monthly_report', [
     'report' => $report,
     'sumOfWorkedTime' => getTimeStringFromSeconds($sumOfWorkedTime),
     'balance' => "{$sign}{$balance}",
-    'periods' => $periods
+    'periods' => $periods,
+    'users' => $users,
 ]);
