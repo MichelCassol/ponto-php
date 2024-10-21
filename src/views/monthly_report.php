@@ -13,15 +13,16 @@
                     <option>Selecione o usuário...</option>
                     <?php
                         foreach ($users as $user) {
-                            echo "<option value='$user->id'>$user->name</option>";
+                            $selected = $user->id === $selectedUserId ? 'selected' : '';
+                            echo "<option value='$user->id' $selected>$user->name</option>";
                         }
                     ?>
                 </select>
                 <select name="period" id="period" class="form-control ml-2" placeholder="Selecione o período...">
-                    <option>Selecione o período...</option>
                     <?php
                         foreach ($periods as $key => $month) {
-                            echo "<option value='$key'>$month</option>";
+                            $selected = $key === $selectedPeriod ? "selected" : "";
+                            echo "<option value='$key' $selected>$month</option>";
                         }
                     ?>
                 </select>
