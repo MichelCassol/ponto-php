@@ -18,17 +18,17 @@ for($yearDiff = 0; $yearDiff <= 2; $yearDiff++){
     $year = date('Y') - $yearDiff;
     for ($month=12; $month >= 1; $month--) {
         $date = new DateTime("$year-$month-1");
-        $periods[$date->format('Y-M')] = strftime('%B de %Y', $date->getTimestamp());
+        $periods[$date->format('Y-m')] = strftime('%B de %Y', $date->getTimestamp());
     }
 }
 
-$registries = WorkingHours::getMonthlyReport($user->id, $currentDate);
+$registries = WorkingHours::getMonthlyReport($selectedUserId, $selectedPeriod);
 
 $report = [];
 $workDay = 0;
 $sumOfWorkedTime = 0;
 $lastDay = getLastDayOfMonth($selectedPeriod)->format('d');
-
+//die(print_r($registries));
 for ($day = 1; $day <= $lastDay; $day++) {
     $date = $selectedPeriod . '-' . sprintf('%02d', $day);
     $registry = $registries[$date];
