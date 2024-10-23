@@ -7,18 +7,20 @@
         );
     ?>
     <div>
-        <form class="mb-4 mt-4" action="#" method="post">
+        <form class="mb-4 mt-4" method="post">
             <div class="input-group">
-                <select name="user" id="user" class="form-control" placeholder="Selecione o usuário...">
-                    <option>Selecione o usuário...</option>
-                    <?php
-                        foreach ($users as $user) {
-                            $selected = $user->id === $selectedUserId ? 'selected' : '';
-                            echo "<option value='$user->id' $selected>$user->name</option>";
-                        }
-                    ?>
-                </select>
-                <select name="period" id="period" class="form-control ml-2" placeholder="Selecione o período...">
+                <?php if ($user->is_admin) : ?>
+                    <select name="user" id="user" class="form-control mr-2" placeholder="Selecione o usuário...">
+                        <option>Selecione o usuário...</option>
+                        <?php
+                            foreach ($users as $user) {
+                                $selected = $user->id === $selectedUserId ? 'selected' : '';
+                                echo "<option value='$user->id' $selected>$user->name</option>";
+                            }
+                        ?>
+                    </select>
+                <?php endif ?>
+                <select name="period" id="period" class="form-control" placeholder="Selecione o período...">
                     <?php
                         foreach ($periods as $key => $month) {
                             $selected = $key === $selectedPeriod ? "selected" : "";
