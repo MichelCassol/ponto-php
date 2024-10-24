@@ -117,6 +117,25 @@ class WorkingHours extends Model
         return "{$sing}{$balanceString}";
     }
 
+    public static function getAbsentUsers()
+    {
+        $today = new DateTime();
+        $result = Database::getResultFromQuery("
+            SELECT name FROM users WHERE NOT EXISTS (
+                SELECT 1 FROM working_hours WHERE work_date = {$today->format('Y-m-d')} AND time1 IS NOT NULL AND users.id = working_hours.user_id
+            )
+        ");
+
+        $absentUsers = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $absentUsers[] = $row['name'];
+            }
+        }
+
+        return $absentUsers;
+    }
+
     public static function getMonthlyReport($userId, $date)
     {
         $registries = [];
