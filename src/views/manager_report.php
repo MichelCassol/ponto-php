@@ -8,17 +8,17 @@
     ?>
     <div class="summary-boxes">
         <div class="summary-box bg-primary">
-            <id class="icofont-users"></id>
+            <i class="icon icofont-users"></i>
             <p class="title">Qtde de Funcionários</p>
             <h3 class="value"><?= $activeUsersCount ?></h3>
         </div>
         <div class="summary-box bg-danger">
-            <id class="icofont-patient-bed"></id>
+            <i class="icon icofont-patient-bed"></i>
             <p class="title">Faltas</p>
             <h3 class="value"><?= count($absentUsers) ?></h3>
         </div>
         <div class="summary-box bg-success">
-            <id class="icofont-sand-clock"></id>
+            <i class="icon icofont-sand-clock"></i>
             <p class="title">Horas Trabalhadas no Mês</p>
             <h3 class="value"><?= $hoursInMonth ?></h3>
         </div>
@@ -28,7 +28,7 @@
         <div class="card mt-4">
             <div class="card-header">
                 <h4 class="card-title">Faltosos do dia</h4>
-                <p class="card-category">Relação dos funcionários que ainda não bateram o ponto</p>
+                <p class="card-category mb-0">Relação dos funcionários que ainda não bateram o ponto</p>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped table-hover">
