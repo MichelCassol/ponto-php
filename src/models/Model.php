@@ -3,7 +3,7 @@
 class Model
 {
     protected static $tableName = '';
-    protected static $columns = [];
+    protected static $coluns = [];
     protected $values = [];
 
     function __construct(array $arr)
@@ -30,17 +30,17 @@ class Model
         $this->values[$key] = $value;
     }
 
-	public static function getOne(array $filters = [], $columns = '*')
+	public static function getOne(array $filters = [], $coluns = '*')
 	{
 		$class = get_called_class();
-		$result = static::getResultSetFromSelect($filters, $columns);
+		$result = static::getResultSetFromSelect($filters, $coluns);
 		return $result ? new $class($result->fetch_assoc()) : null;
 	}
 
-	public static function get(array $filters = [], $columns = '*')
+	public static function get(array $filters = [], $coluns = '*')
 	{
 		$objects = [];
-		$result = static::getResultSetFromSelect($filters, $columns);
+		$result = static::getResultSetFromSelect($filters, $coluns);
 		if ($result) {
 			$class = get_called_class();
 			while ($row = $result->fetch_array()) {
@@ -50,9 +50,9 @@ class Model
 		return $objects;
 	}
 
-	public static function getResultSetFromSelect(array $filters = [], string $columns = '*')
+	public static function getResultSetFromSelect(array $filters = [], string $coluns = '*')
 	{
-		$sql = "SELECT $columns FROM " . static::$tableName . static::getFilters($filters);
+		$sql = "SELECT $coluns FROM " . static::$tableName . static::getFilters($filters);
 		$result = Database::getResultFromQuery($sql);
 		if ($result->num_rows === 0) {
 			return null;

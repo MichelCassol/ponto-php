@@ -2,7 +2,7 @@
 class User extends Model
 {
     protected static $tableName = 'users';
-    protected static $columns = [
+    protected static $coluns = [
         'id',
         'name',
         'password',
@@ -15,5 +15,13 @@ class User extends Model
     public static function getActiveUsersCount()
     {
         return static::getCount(['raw' => 'end_date IS NULL']);
+    }
+
+    public function insert()
+    {
+        $this->is_admin = $this->is_admin ? 1 : 0;
+        if (!$this->end_date) $this->end_date = null;
+        // die(var_dump($this));
+        return parent::insert();
     }
 }
