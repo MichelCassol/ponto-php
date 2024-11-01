@@ -6,17 +6,25 @@ class Model
     protected static $coluns = [];
     protected $values = [];
 
-    function __construct(array $arr)
+    function __construct(array $arr, bool $sanatize = true)
     {
-        $this->loadFromArray($arr);
+        $this->loadFromArray($arr, $sanatize);
     }
 
-    public function loadFromArray(array $arr)
+    public function loadFromArray(array $arr, bool $sanatize)
     {
         if ($arr) {
+			$conn = Database::getConnection();
             foreach ($arr as $key => $value) {
-               $this->$key = $value; 
+				$cleanValue = $value;
+				if ($sanatize && isset($value)) {
+					$cleanValue = strip_tags(trim($cleanValue));
+					$cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
+					$cleanValue = mysqli_real_escape_string($conn, $cleanValue);
+				}
+               $this->$key = $cleanValue; 
             }
+			$conn->close();
         }
     }
 
@@ -90,6 +98,12 @@ class Model
         $result = static::getResultSetFromSelect($filters, 'COUNT(*) AS count');
         return $result->fetch_assoc()['count'];
     }
+
+	public static function deleteById($id)
+	{
+		$sql = "DELETE FROM " . static::$tableName . " WHERE id = $id";
+		Database::executeSQL($sql);
+	}
 
 	private static function getFilters(array $filters)
 	{

@@ -9,7 +9,7 @@
         include(TEMPLATE_PATH . '/messages.php');
     ?>
 
-    <form method="post">
+    <form method="post" action="save_user.php">
         <div class="form-row mt-3">
             <div class="form-group col-md-6">
                 <label for="name">Nome</label>
