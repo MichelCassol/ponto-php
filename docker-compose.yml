@@ -11,14 +11,14 @@ services:
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         command: --default-authentication-plugin=mysql_native_password
 
-    phpmyadmin:
-        container_name: ${CONTAINER_NAME}_phpmyadmin
-        image: phpmyadmin
-        restart: always
-        ports:
-            - "8080:80"
-        links:
-            - db
+    # phpmyadmin:
+    #     container_name: ${CONTAINER_NAME}_phpmyadmin
+    #     image: phpmyadmin
+    #     restart: always
+    #     ports:
+    #         - "8080:80"
+    #     links:
+    #         - db
 
     server:
         container_name: ${CONTAINER_NAME}_server

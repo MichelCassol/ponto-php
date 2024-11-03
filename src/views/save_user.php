@@ -10,6 +10,7 @@
     ?>
 
     <form method="post" action="save_user.php">
+        <input type="hidden" name="id" value="<?= $id ?>">
         <div class="form-row mt-3">
             <div class="form-group col-md-6">
                 <label for="name">Nome</label>
@@ -67,11 +68,8 @@
         <div class="form-row mb-3">
             <div class="form-group col-md-1">
                 <label for="is_admin">Administrador?</label>
-                <input type="checkbox" name="is_admin" id="is_admin" placeholder="Informe a data de admissão" 
-                    class="form-control-sm <?= $errors['is_admin'] ? 'is-invalid' : ''?>" <?= $is_admin ? 'checked' : ''?> >
-                <div class="invalid-feedback">
-                    <?= $errors['is_admin'] ?>
-                </div>
+                <input type="checkbox" name="is_admin" id="is_admin"
+                    class="form-control-sm" <?= $is_admin ? 'checked' : ''?> >
             </div>
         </div>
         <div>

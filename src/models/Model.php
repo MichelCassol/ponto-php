@@ -38,6 +38,11 @@ class Model
         $this->values[$key] = $value;
     }
 
+	public function getValues()
+	{
+		return $this->values;
+	}
+
 	public static function getOne(array $filters = [], $coluns = '*')
 	{
 		$class = get_called_class();
@@ -77,6 +82,8 @@ class Model
 			$sql .= static::getFormatedValue($this->$col) . ",";
 		}
 		$sql[strlen($sql) - 1] = ")";
+
+		// die ($sql);
 
 		$id = Database::executeSQL($sql);
 		$this->id = $id;
@@ -125,7 +132,7 @@ class Model
 	private static function getFormatedValue($value)
 	{
 		if (is_null($value)) {
-			return "null";
+			return 'null';
 		} elseif (gettype($value) === "string") {
 			return "'$value'";
 		} else {
