@@ -10,15 +10,11 @@ if (count($_POST) === 0 && isset($_GET['update'])) {
     $userData = $user->getValues();
     $userData['password'] = null;
 } elseif (count($_POST) > 0) {
-    // var_dump($_POST);
-    // exit;
     try {
         $dbUser = new User($_POST);
         if ($dbUser->id) {
             $dbUser->update();
             addSuccessMsg('Usuário alterado com sucesso!');
-            header('Location: users.php');
-            exit;
         } else {
             $dbUser->id = null;
             $dbUser->insert();
@@ -30,6 +26,7 @@ if (count($_POST) === 0 && isset($_GET['update'])) {
     } finally {
         $userData = $_POST;
     }
+    header('Location: users.php');
 }
 
 loadTemplateView('save_user', $userData + ['exception' => $exception]);

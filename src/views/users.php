@@ -30,7 +30,7 @@
                         <a href="save_user.php?update=<?= $user->id ?>" class="btn btn-warning rounded-circle mr-2">
                             <i class="icofont-edit"></i>
                         </a>
-                        <a href="?delete=<?= $user->id ?>" class="btn btn-danger rounded-circle">
+                        <a href="users.php?delete=<?= $user->id ?>" class="btn btn-danger rounded-circle" onclick="confirmarExclusao(event, '<?= $user->id ?>')">
                             <i class="icofont-trash"></i>
                         </a>
                     </td>

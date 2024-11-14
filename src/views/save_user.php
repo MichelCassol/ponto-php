@@ -73,7 +73,7 @@
             </div>
         </div>
         <div>
-            <button class="btn btn-primary btn-lg">Salvar</button>
+            <button class="btn btn-primary btn-lg" onclick="window.location.href=users.php">Salvar</button>
             <a href="/users.php" class="btn btn-secondary btn-lg">Cancelar</a>
         </div>
     </form>

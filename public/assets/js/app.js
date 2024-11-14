@@ -32,4 +32,15 @@ function activateClock()
 	
 }
 
-activateClock()
+activateClock();
+
+function confirmarExclusao(event, id) {
+	event.preventDefault();
+	const resposta = confirm("Tem certeza de que deseja excluir este item?");
+	if (resposta) {
+		window.location.href = "users.php?delete="+id;
+	} else {
+		window.location.href = "/users.php";
+	}
+	return false;
+}
