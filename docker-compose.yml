@@ -31,6 +31,8 @@ services:
             - "${PWD}:/var/www/html"
         ports:
             - "${PORT}:80"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         links:
             - db
         depends_on:

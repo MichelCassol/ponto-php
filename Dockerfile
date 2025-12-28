@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 
 # Define as váriaveis do usuário e uid
 ARG user
@@ -10,10 +10,20 @@ RUN a2enmod rewrite
 # Define o diretório de trabalho do apache
 WORKDIR /var/www/html/
 
+RUN echo "xdebug.mode=debug" >> "${PHP_INI_DIR}/conf.d/xdebug.ini" \
+    && echo "xdebug.discover_client_host=0" >> "${PHP_INI_DIR}/conf.d/xdebug.ini" \
+    && echo "xdebug.client_host=host.docker.internal" >> "${PHP_INI_DIR}/conf.d/xdebug.ini" \
+    && echo "xdebug.client_port=9003" >> "${PHP_INI_DIR}/conf.d/xdebug.ini" \
+    && echo "xdebug.idekey=vscode" >> "${PHP_INI_DIR}/conf.d/xdebug.ini" \
+    && echo "xdebug.log_level=0" >> "${PHP_INI_DIR}/conf.d/xdebug.ini"
+
+
 RUN apt-get update \
     && apt-get install -y git unzip libpng-dev libjpeg-dev libfreetype6-dev  locales \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install mysqli pdo pdo_mysql
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && pecl install xdebug-3.1.6 \
+    && docker-php-ext-enable xdebug
 
 # Define o DocumentRoot para a pasta 'public'
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
